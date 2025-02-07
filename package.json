@@ -1,0 +1,112 @@
+{
+  "name": "deepseek-chat",
+  "displayName": "Deepseek Chat",
+  "description": "Chat with deepseek",
+  "version": "0.0.0",
+  "publisher": "isopodlabs",
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrianstephens/vscode-deepseek2.git"
+  },
+  "files": [
+    "out/**/*.js",
+    "assets/icon.png",
+    "LICENSE.txt"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "deepseek2-activitybar",
+          "title": "DeepSeek",
+          "icon": "assets/deepseek.svg"
+        }
+      ]
+    },
+    "views": {
+      "deepseek-activitybar": [
+        {
+          "id": "deepseek2-view",
+          "name": "DeepSeek",
+          "type": "webview"
+        }
+      ]
+    },
+  "commands": [
+      {
+        "command": "deepseek2.chat",
+        "title": "Deepseek Chat"
+      }
+    ],
+    "menus": {
+      "view/title": [
+      ]
+    },
+    "configuration": {
+      "title": "DeepSeek",
+      "properties": {
+        "deepseek2.proxy": {
+          "type": "string",
+          "default": "",
+          "description": "Set up a custom proxy server of https://api.deepseek2.com"
+        },
+        "deepseek2.model": {
+          "type": "string",
+          "default": "",
+          "description": "Set the model of deepseek2. Available models: deepseek-chat, deepseek-coder, deepseek-reasoner"
+        },
+        "deepseek2.apikey": {
+          "type": "string",
+          "default": "",
+          "description": "Set the API key of deepseek"
+        },
+        "deepseek2.temperature": {
+          "type": "string",
+          "default": "",
+          "description": "Set the temperature of deepseek API,between 0 and 2"
+        },
+        "deepseek2.max_tokens": {
+          "type": "string",
+          "default": "",
+          "description": "Set the max_tokens of deepseek API. Max value is 8192 when using beta endpoint"
+        },
+        "deepseek2.lang": {
+          "type": "string",
+          "default": "",
+          "description": "Set the language of deepseek2."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint \"src/**/*.ts\"",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "publish": "vsce publish patch"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.9",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^8.10.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "@vscode/codicons": "^0.0.36"
+  },
+  "dependencies": {
+    "openai": "^4.83.0"
+  }
+}
