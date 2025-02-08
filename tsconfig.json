@@ -1,17 +1,24 @@
 {
 	"compilerOptions": {
-		  "target": "es2022",
-		  "module": "CommonJS",
-	  "lib": [
-		"es2022"
-	  ],
-	  "rootDir": "src",
-	  "outDir": "out",
-	  "sourceMap": true,
-	  "strict": true,
+		"target": "es2022",
+		"module": "CommonJS",
+		"moduleResolution": "node",
+		"lib": ["es2022"],
+		"outDir": "out",
+		"sourceMap": true,
+		"strict": true,
+		"rootDir": ".",
+		"jsx": "react-jsx",
+		"jsxImportSource": "shared",
+		"forceConsistentCasingInFileNames": true,
+		"rewriteImports": true,
+		"baseUrl": "src",
+		"paths": {
+			"shared/*": [
+				"../shared/src/*"
+			]
+		}
 	},
-	"include": [
-	  "src/extension.ts"
-	]
+	"include": ["src/extension.ts", "shared/src/jsx.d.ts"],
   }
   
