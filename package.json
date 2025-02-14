@@ -35,7 +35,7 @@
 			]
 		},
 		"views": {
-			"deepseek-activitybar": [
+			"deepseek2-activitybar": [
 				{
 					"id": "deepseek2-view",
 					"name": "DeepSeek",
@@ -66,35 +66,35 @@
 		"configuration": {
 			"title": "DeepSeek",
 			"properties": {
-				"deepseek2.proxy": {
+				"deepseek2.server": {
 					"type": "string",
-					"default": "",
-					"description": "Set up a custom proxy server of https://api.deepseek2.com"
+					"default": "http://threadripper.local:11434",
+					"description": "API Server"
 				},
 				"deepseek2.model": {
 					"type": "string",
-					"default": "",
-					"description": "Set the model of deepseek2. Available models: deepseek-chat, deepseek-coder, deepseek-reasoner"
+					"default": "deepseek-r1:32b",
+					"description": "Set the model"
 				},
 				"deepseek2.apikey": {
 					"type": "string",
-					"default": "",
-					"description": "Set the API key of deepseek"
+					"default": "sk-kgahvlalrbfjyftxrciniliopeblhxsgrxebrwgiqwwxwxth",
+					"description": "Set the API key"
 				},
 				"deepseek2.temperature": {
 					"type": "string",
-					"default": "",
-					"description": "Set the temperature of deepseek API,between 0 and 2"
+					"default": "0",
+					"description": "Set the API temperature, between 0 and 2"
 				},
 				"deepseek2.max_tokens": {
 					"type": "string",
-					"default": "",
-					"description": "Set the max_tokens of deepseek API. Max value is 8192 when using beta endpoint"
+					"default": "4096",
+					"description": "Set the max_tokens of the API"
 				},
 				"deepseek2.lang": {
 					"type": "string",
-					"default": "",
-					"description": "Set the language of deepseek2."
+					"default": "en",
+					"description": "Set the language"
 				}
 			}
 		}
@@ -117,6 +117,8 @@
 		"@vscode/codicons": "^0.0.36"
 	},
 	"dependencies": {
+		"@types/katex": "^0.16.7",
+		"katex": "^0.16.21",
 		"openai": "^4.83.0"
 	},
 	"overrides": {

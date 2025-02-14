@@ -11,11 +11,10 @@ function addMessage(role, message) {
 }
 
 sendButton.addEventListener('click', () => {
-	const message = chatInput.value.trim();
-	if (message) {
-		addMessage('user', message);
+	const text = chatInput.value.trim();
+	if (text) {
 		chatInput.value = '';
-		vscode.postMessage({command:'message', message});
+		vscode.postMessage({command:'question', text});
 	}
 });
 
@@ -28,16 +27,24 @@ chatInput.addEventListener('keypress', (e) => {
 
 window.addEventListener('message', event => {
 	switch (event.data.command) {
-		case 'message':
-			reply = addMessage('assistant', event.data.message);
+		case 'question':
+			addMessage('user', event.data.text);
+			break;
+
+		case 'begin':
+			reply = addMessage('assistant', '');
 			break;
 
 		case 'set':
 			reply.innerHTML = event.data.html;
-			break;
-
-		case 'stream':
-			reply.textContent += event.data.message;
+			if (window.MathJax) {
+				window.MathJax.typesetPromise([reply]).then(() => {
+                    console.log('MathJax typesetting complete');
+                }).catch((err) => {
+                    console.error('MathJax typesetting failed:', err);
+                });
+                //window.MathJax.typesetPromise([reply]);
+            }
 			break;
 
 		case 'clear':
