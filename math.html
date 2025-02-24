@@ -1,0 +1,286 @@
+
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="assets/markdown.css"/>
+	<link rel="stylesheet" type="text/css" href="assets/maths.css"/>
+</head>
+<body>
+  <p>
+    <maths>
+      <sqrt rows="2">
+        <frac>
+          <identifier>x</identifier>
+          <span>
+            <identifier>x</identifier>+1
+          </span>
+        </frac>
+      </sqrt>
+    </maths>
+  </p>
+  <p>
+    <maths>
+      <big>∫
+        <sup>∞</sup>
+        <sub>-∞</sub>
+        <identifier>x</identifier>
+      </big>
+    </maths>
+  </p>
+  <think>
+Okay, so I need to figure out what sin(t/2) is. Hmm, I remember that sine functions can often be expressed using half-angle identities. Let me try to recall those. 
+  <p>I think the half-angle formula for sine is something like sin(x/2), which would relate to cos(x). Maybe it's connected through a double angle identity? Wait, if I have an expression where x is replaced by t, then sin(t/2) should fit into that framework.</p>
+  <p>Let me write down what I remember of the half-angle formulas. There are a few, like:</p>
+  <p>sin²(x) = (1 - cos(2x))/2</p>
+  <p>and</p>
+  <p>cos²(x) = (1 + cos(2x))/2.</p>
+  <p>But wait, how does this help me with sin(t/2)? Maybe if I let x be equal to t/2. So substituting x with t/2 in the formula, that would give:</p>
+  <p>sin(t/2)^2 = (1 - cos(t))/2</p>
+  <p>So then, taking the square root of both sides, we'd have:</p>
+  <p>sin(t/2) = sqrt[(1 - cos t)/2]</p>
+  <p>But hold on a second, sine can be positive or negative depending on the quadrant where t/2 lies. So is there an absolute value involved here? I think so. The square root gives the principal (non-negative) root, but sine itself could be negative if t/2 is in certain quadrants.</p>
+  <p>Let me double-check this. If t is such that t/2 is in a range where sine is positive or negative. For example, if t is between 0 and π, then t/2 would be between 0 and π/2, so sin(t/2) is positive. But if t were between π and 2π, t/2 would be between π/2 and π, which still doesn't change the fact that sine is positive. Wait, actually in the range π to 2π, t is there, but t/2 would be in the second quadrant where sine is still positive.</p>
+  <p>Wait, does it ever result in a negative? Let's see: if someone takes t as negative, say t between -2π and 0, then t/2 would be between -π and 0. In that case, sine is negative because angles are measured from the origin and negative angles go clockwise. So sin(-x) = -sin(x). Therefore, perhaps the identity has a sign depending on the quadrant.</p>
+  <p>But in most standard cases, especially when dealing with principal values or without specific context, we assume t is within 0 to 2π or similar ranges where sine would be non-negative for t/2. Hmm.</p>
+  <p>Wait, another thought: is there an alternative expression for sin(t/2)? Maybe through the use of exponential functions or something else? Or are there multiple ways to express it?</p>
+  <p>I think in terms of trigonometric identities, yes, we can write sin(t) using double angle expressions as well, but that's not necessarily helpful here.</p>
+  <p>Alternatively, I remember that sometimes when integrating sin functions with arguments like t/2, you might use substitution methods or relate them to other known integrals. But maybe that's a different topic.</p>
+  <p>So stepping back: What is the half-angle formula again? It states that:</p>
+  <p>sin(x) = sqrt[(1 - cos(2x))/2]</p>
+  <p>But if I solve for sin(t/2), which would make x in the above identity as t/2, so 2x = t. Then substituting, we get:</p>
+  <p>sin(t/2) = sqrt[(1 - cos t)/2]</p>
+  <p>So yes, that must be it. But again, considering the negative root when necessary.</p>
+  <p>Wait, is there a cofunction identity or another formula? Co-function identities relate sine and cosine of complementary angles, like sin(x) = cos(π/2 - x), but that doesn’t seem directly helpful here.</p>
+  <p>Hmm, perhaps instead of worrying about the sign too much, unless more context about t's range is provided. Since trigonometric functions are periodic and can take both positive and negative values depending on the angle.</p>
+  <p>So in summary, sin(t/2) can be expressed using the half-angle identity as:</p>
+  <p>sin(t/2) = sqrt[(1 - cos t)/2]</p>
+  <p>Alternatively, it can also be written in terms of the tangent function if needed, but I think that might complicate things more.</p>
+  <p>Wait another thought: There's an identity that expresses sine of a half-angle in terms of sine and cosine of the whole angle, but as far as I recall, most directly it relates to cosine t.</p>
+  <p>So given this, unless there's some context where sin(t/2) is required for something like differential equations or something else... But since I don't have that information, probably just stick with the half-angle formula.</p>
+  <p>But maybe an example would help. Let me compute sin(t/2) when t = π. So plugging in t=π: sin(π/2)=1. Now using my identity:</p>
+  <p>sin(π/2) should be sqrt[(1 - cos π)/2] = sqrt[(1 - (-1))/2] = sqrt[2/2] = sqrt[1] = 1. That works. What if t=0: sin(0)=0, and through the formula: sqrt[(1 - cos 0)/2] = sqrt[(1-1)/2]=sqrt[0]=0. Perfect.</p>
+  <p>What about t=3π/2: then sin(t/2) = sin(3π/4) = sqrt(2)/2. Plugging into identity:</p>
+  <p>sqrt[(1 - cos(3π/2))/2] = sqrt[(1 - 0)/2] = sqrt[1/2] = sqrt(2)/2. Also correct.</p>
+  <p>Another test: t=5π, so t is in the range where t is more than 2π; sin(t/2)=sin(5π/2)=1, but wait actually 5π/2 is equivalent to π/2 plus 2π*1, which brings it back to sin(pi/2) which is 1. Using my formula:</p>
+  <p>sqrt[(1 - cos(5π))/2] = sqrt[(1 - (-1))/2] = sqrt[2/2]=1.</p>
+  <p>Same result, great.</p>
+  <p>What if t=7π/4: then t/2=7pi/8. sin(7pi/8)=sin(pi - pi/8)=sin(pi/8)=sqrt[(1 - cos(pi/8))/something? Wait no, directly from the half-angle formula, or perhaps I made a mistake in calculation.</p>
+  <p>Wait no, 7π/4 divided by 2 is 7π/8. So sin(7π/8). Hmm pi minus 7pi/8 is pi/8, so we know that sin(7pi/8)=sin(pi - pi/8)=sin(pi/8), which is sqrt[(1 - cos(pi/4))/2]?</p>
+  <p>Wait no, wait. Using the formula with t=7π/4:</p>
+  <p>sqrt[(1 - cos(7π/4))/2]. Cos(7pi/4) is cos(-pi/4 + 2pi)=cos(pi/4)=sqrt(2)/2.</p>
+  <p>So it's sqrt[(1 - sqrt(2)/2)/2] = sqrt[(2 - sqrt(2))/4] which simplifies to [sqrt(2 - sqrt(2))]/2, which is equal to sin(pi/8). But 7pi/8 isn't pi/8. Wait the sine function is not necessarily equal for supplementary angles in terms of their half-angle identities.</p>
+  <p>Wait no, wait that's about it... For example,</p>
+  <p>sin(x) = sin(pi - x), but cos(x)= -cos(pi -x). So in any case, t/2=7pi/8: pi - 7pi/8 is pi/8. So sin(7pi/8)=sin(pi/8). But how does that come into play with the half-angle formula?</p>
+  <p>Well, using my formula for t=7pi/4, which gives me sqrt[(1 - cos(7pi/4))/2] = sqrt[(1 - sqrt(2)/2)/2], which is sin(pi/8). Alternatively, t/2=3pi/2; wait no.</p>
+  <p>Wait I think mixing up angles here. Let’s just move on for now.</p>
+  <p>So in all the test cases above, my formula gives me correct results for various t values, positive and beyond 2π etc. So I think the formula holds true regardless of where t is because cosine is a periodic function with period 2pi.</p>
+  <p>Thus, sin(t/2) can be expressed as sqrt[(1 - cos t)/2]. But it's essential to consider that sin(t/2) can have negative values depending on where t is. For example, if someone takes t between pi and 2pi, then t is in the range (0, 2pi), but t being beyond 2pi would make t modulo 2pi.</p>
+  <p>Well maybe not necessary for the algebraic expression as it stands. So perhaps sin(t/2) = ±sqrt[(1 - cos t)/2], with the sign depending on the quadrant where t/2 is located.</p>
+  <p>But unless more context about t's interval is specified, one cannot determine the exact sign, so the expression holds in terms of absolute value.</p>
+  <p>Wait another point: If in some cases sin(t/2) could be negative or positive. So, maybe there are instances when I need to include both solutions?</p>
+  <p>Let me check my reference material mentally. In standard practice, for example, in calculus when we integrate expressions involving sqrt(a^2 - x^2), we have to consider the sign, but since this is a functional expression, perhaps it's acceptable.</p>
+  <p>But hold on. Let me think. If f(t) = sin(t/2), and I rewrite this as sqrt[(1 - cos t)/2], that is, for all t.</p>
+  <p>It can be proven that:</p>
+  <p>sin^2(theta) = [1 - cos(2theta)] / 2. So replacing theta with t/2: sin^2(t/2)= [1 - cos t]/2.</p>
+  <p>Taking the square root, we get |sin(t/2)| = sqrt[(1 - cost)/2]. But since sqrt gives non-negative results, it's always positive, which conflicts directly when sin(t/2) should be negative in certain quadrants. So perhaps the correct identity is that:</p>
+  <p>|sin(t/2)| = sqrt[(1 - cos t)/2].</p>
+  <p>Which might mean that whenever I state sin(t/2) equals something using this formula, I have to account for the sign based on the quadrant.</p>
+  <p>Therefore, strictly as an identity sin(t/2)=±sqrt[(1 – cost)/2]. The positive or negative is determined based on where the angle t/2 is. So if t is between 0 and pi, then t/2 is between 0 and pi/2; sin(t/2) is positive.</p>
+  <p>If t is between pi and 2pi: t/2 is between pi/2 and pi; which is also in a region where sine is positive—wait no: pi and 3pi/2 would be t's such that t/2 is between pi/2 and 3pi/4, etc.—so actually no. Let me think.</p>
+  <p>Wait sin(t) is non-negative in [0, pi] and negative in [pi, 2pi]. Wait no, no—this is about sin(t), not sin(t/2). For sin(t/2):</p>
+  <p>Case when t from 0 to 2pi:</p>
+  <p>When t is between 0 and pi: t/2 in 0 to pi/2: sine positive.</p>
+  <p>t between pi and 2pi: t/2 between pi/2 and pi: still sine positive, as in both [0, pi], sine is non-negative. Hmmm, so actually sin(t/2) ranges from 0 to 1 for [0, pi], then back to 0 at pi, reaches -? Wait no.</p>
+  <p>Wait let's be precise:</p>
+  <p>The angle theta = t/2.</p>
+  <p>When does sin(theta) switch sign?</p>
+  <p>At theta=0 (sin 0=0), to sin(pi/2)=1 increasing. Then decreasing back to zero at theta= pi. So for theta in [0, pi], sin(theta) is non-negative.</p>
+  <p>Similarly, if we allow theta beyond 2pi:</p>
+  <p>Wait t can go beyond 2pi. For example, if you take t=3pi: t/2=3pi/2, which would make sin(3pi/2)= -1.</p>
+  <p>So the sine function over all real theta is periodic and takes positive and negative values.</p>
+  <p>Thus, in order to correctly express sin(t/2), using this identity, we need to have:</p>
+  <p>sin(t/2)=sqrt[ (1 – cos t)/2 ] when sin(t/2) &gt;=0,</p>
+  <p>and</p>
+  <p>sin(t/2)=-sqrt[...] when sin(t/2)&lt;0.</p>
+  <p>But since [1 - cost]/2 is always non-negative; that is because 1 – cost ranges from 0 to 2, inclusive.</p>
+  <p>Thus, for t even beyond 2pi, sin(t/2) can be negative. So the formula gives the absolute value:</p>
+  <p>|sin(t/2)|=sqrt[(1 – cos t)/2], and when we reconstruct sin(t/2), have to include either positive or negative sign as per where theta =t/2 is.</p>
+  <p>So this seems necessary.</p>
+  <p>But in the original question: "What is sin(t/2)?" If using only formula, which requires considering quadrants? Or not?</p>
+  <p>Wait no. Because t could be any real number. So if we want an expression for sin(theta), where theta can be anything, as in all reals, then perhaps the square causes ambiguity. Therefore, when you invert from [1 – cos2t]/2 formula.</p>
+  <p>Maybe it's more of a functional representation. But without specific intervals, perhaps it is standard to present the principal value with sine positive.</p>
+  <p>Wait, but actually sin(theta) is not always positive; whether t is given over all real numbers. So, if I were writing an equation for sin(t/2), using sqrt[(1 – cost)/2], then we might lose the sign of sine function when theta=t/2 is in certain intervals.</p>
+  <p>But wait since sqrt(a^2)=|a|, so to get a from sqrt(a^2), you have to include a ±. Hence similarly for sin(theta) as sqrt(something), which is magnitude, but doesn't include sign on its own.</p>
+  <p>So how we write it would depend on context: if t ranges over specific interval such that theta=t/2 is known to be where sine is positive or negative.</p>
+  <p>Hence, for the answer given, since there's no indication of an interval, perhaps only the formula as in absolute value can be represented? But actually, the original identity from trigonometric identities is: sin(theta)= ±sqrt[(1 – cos 2theta)/2]. So when deriving sin(t/2), you have sin(t/2)=±sqrt[(1 – cost)/2].</p>
+  <p>Hence, to write sin(t/2) in terms of cos t, the formula is equal to plus or minus square root depending on quadrant.</p>
+  <p>Given that, perhaps in the general case, one writes an expression for either the principal value (with a positive square root), but acknowledging ambiguity when t varies beyond a specific interval. Wait no: For example:</p>
+  <p>If someone's just asking what sin(t/2) is equal to in terms of cosine function, then it's ±sqrt[(1 – cost)/2].</p>
+  <p>Similarly, as when we derive half-angle identities from double-angle.</p>
+  <p>Thus, strictly speaking, the formula for sin theta in terms of cos 2 theta is:</p>
+  <p>Either sin theta = sqrt[(1 - cos 2theta)/2] or -sqrt(...).</p>
+  <p>Therefore, without context, it's ±sqrt[(1 – cost)/2], but usually, if working within an interval where sine is positive, you can drop the negative sign.</p>
+  <p>Given that, for the given question of "what is sin(t/2)", perhaps writing with the plus and minus:</p>
+  <p>sin(t/2) = ±√[(1 - cos t)/2]</p>
+  <p>But as in, without more context about t's interval, it is appropriate to include both signs. Hmm, but in standard trigonometric identities, when using half-angle formulas, for sin(theta)=sqrt( (1 - cos 2theta)/2 ), and note that the sign depends on theta's quadrant.</p>
+  <p>Hence, if I say:</p>
+  <p>sin(t/2) = ±√[(1 - cos t)/2]</p>
+  <p>And in a box, putting that as an expression but indicating it might be positive or negative depending on theta. Alternatively, it could perhaps have more context given about t.</p>
+  <p>But since the original question just asks "what is sin(t/2)", then probably expects writing in terms of cosine.</p>
+  <p>Hence, boxed:</p>
+  <p>
+    <maths>
+      <boxed>± 
+        <sqrt rows="2">
+          <frac>
+            <span>1 - 
+              <func>cos</func> 
+              <identifier>t</identifier>
+            </span>2
+          </frac>
+        </sqrt>
+      </boxed>
+    </maths>
+  </p>
+  <p>Alternatively, I can write either sin(t/2) = sqrt( (1 – cost)/2 ) with a note that the sign is determined by location. But perhaps the user just expects as per standard identity.</p>
+  <p>Wait in textbooks when they present such formulas, they use ± and mention depending on the quadrant where theta is.</p>
+  <p>So overall, it's equal to plus or minus sqrt[(1 - cos t)/2], so yeah, the final answer is that expression.</p>
+  <p>
+    <strong>Final Answer</strong> The value of sin(t/2) is 
+    <maths>
+      <boxed>± 
+        <sqrt rows="2">
+          <frac>
+            <span>1 - 
+              <func>cos</func> 
+              <identifier>t</identifier>
+            </span>2
+          </frac>
+        </sqrt>
+      </boxed>.
+    </maths>
+  </p>
+  </think>
+  <p>To determine the value of 
+    <maths> 
+      <func>sin</func>(
+      <identifier>t</identifier>/2) 
+    </maths> in terms of trigonometric identities, we start with the double-angle identity for cosine:
+  </p>
+  <p>
+    <maths>
+      <func>cos</func>(2
+      <identifier>θ</identifier>) = 1 - 2
+      <func>sin</func>
+      <sup>2</sup>(
+      <identifier>θ</identifier>)
+    </maths>
+  </p>
+  <p>By rewriting this identity to solve for 
+    <maths>
+      <func>sin</func>
+      <sup>2</sup>(
+      <identifier>θ</identifier>)
+    </maths>, we get:
+  </p>
+  <p>
+    <maths>
+      <func>sin</func>
+      <sup>2</sup>(
+      <identifier>θ</identifier>) = 
+      <frac>
+        <span>1 - 
+          <func>cos</func>(2
+          <identifier>θ</identifier>)
+        </span>2
+      </frac>
+    </maths>
+  </p>
+  <p>Now, substituting 
+    <maths>
+      <identifier>θ</identifier>
+    </maths> with 
+    <maths>
+      <identifier>t</identifier>/2
+    </maths>, we have:
+  </p>
+  <p>
+    <maths>
+      <func>sin</func>
+      <sup>2</sup>(
+      <identifier>t</identifier>/2) = 
+      <frac>
+        <span>1 - 
+          <func>cos</func>(
+          <identifier>t</identifier>)
+        </span>2
+      </frac>
+    </maths>
+  </p>
+  <p>Taking the square root of both sides gives us the absolute value of 
+    <maths>
+      <func>sin</func>(
+      <identifier>t</identifier>/2)
+    </maths>:
+  </p>
+  <p>
+    <maths>
+      <abs>
+        <func>sin</func>(
+        <identifier>t</identifier>/2)
+      </abs> = 
+      <sqrt rows="2">
+        <frac>
+          <span>1 - 
+            <func>cos</func>(
+            <identifier>t</identifier>)
+          </span>2
+        </frac>
+      </sqrt>
+    </maths>
+  </p>
+  <p>Since 
+    <maths>
+      <func>sin</func>(
+      <identifier>t</identifier>/2)
+    </maths> can be either positive or negative depending on the quadrant in which 
+    <maths>
+      <identifier>t</identifier>/2
+    </maths> lies, we include both possibilities:
+  </p>
+  <p>
+    <maths>
+      <func>sin</func>(
+      <identifier>t</identifier>/2) = ± 
+      <sqrt rows="2">
+        <frac>
+          <span>1 - 
+            <func>cos</func>(
+            <identifier>t</identifier>)
+          </span>2
+        </frac>
+      </sqrt>
+    </maths>
+  </p>
+  <p>Thus, the value of 
+    <maths> 
+      <func>sin</func>(
+      <identifier>t</identifier>/2) 
+    </maths> is:
+  </p>
+  <p>
+    <maths>
+      <boxed>± 
+        <sqrt rows="2">
+          <frac>
+            <span>1 - 
+              <func>cos</func> 
+              <identifier>t</identifier>
+            </span>2
+          </frac>
+        </sqrt>
+      </boxed>
+    </maths>
+  </p>
+  <p>\f\relax{x} = \int_{-\infty}^\infty \f\hat\xi\,e^{2 \pi i \xi x} \,d\xi</p>
+</body>
+</html>

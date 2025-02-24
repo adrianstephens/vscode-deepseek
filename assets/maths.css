@@ -1,0 +1,91 @@
+maths {
+	font-family: maths;
+}
+
+identifier {
+	font-style: italic;
+}
+
+func {
+	font-weight: normal;
+}
+
+sub,
+sup {
+	line-height: 0;
+}
+
+*:has(sub) > sup {
+	position: absolute;
+	color: #0f0;
+}
+*:has(sup) > sub {
+	color: #f00;
+}
+
+frac {
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	text-align: center;
+
+	& > *:first-child {
+		display: block;
+		font: inherit;
+		padding: 0 0.3em;
+		border-bottom: 0.08em solid;
+	}
+	& > *:last-child {
+		display: block;
+		font: inherit;
+		padding: 0 0.3em;
+	}
+}
+
+sqrt {
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+
+	&:before {
+		content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 50" preserveAspectRatio="none"><path d="M2,48 L18,2" stroke="black" stroke-width="2" fill="none" /><path d="M0,40 L2,48" stroke="black" stroke-width="2" fill="none" /></svg>');
+/*
+		background-repeat: no-repeat;
+		background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 50" preserveAspectRatio="none"><path d="M2,48 L18,2" stroke="black" stroke-width="2" fill="none" /><path d="M0,40 L2,48" stroke="black" stroke-width="2" fill="none" /></svg>');
+        background-position: center;
+        background-size: contain;*/
+		/*content: '\221A';
+		left: -.4em;
+		top: 0;
+		padding-right: 0.2em;
+		*/
+		position: absolute;
+		height: 100%;
+		width: 10px;
+	}
+	&:after {
+		content: '';
+		position: absolute;
+		left: 0.7em;
+		top: 0.052em;
+		border-top: 0.08em solid;
+		width: calc(100% - 0.6em);
+	}
+	maths &:after {
+		content: '';
+		position: absolute;
+		left: 0.6em;
+		top: 0;
+		border-top: 0.08em solid;
+		width: calc(100% - 0.5em);
+	}
+	& > root {
+		position: absolute;
+		font-size: 50%;
+		padding-left: 0.2em; /* Adjust this value as needed */
+	}
+	& > * {
+		display: inline-block;
+		padding-left: 1em; /* Adjust this value as needed */
+	}
+}

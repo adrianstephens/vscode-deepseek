@@ -111,10 +111,10 @@
 		"@types/mocha": "^10.0.9",
 		"@types/node": "20.x",
 		"@types/vscode": "^1.80.0",
-		"typescript": "npm:@isopodlabs/typescript@^5.8.0",
 		"@typescript-eslint/eslint-plugin": "^8.10.0",
 		"@typescript-eslint/parser": "^8.7.0",
-		"@vscode/codicons": "^0.0.36"
+		"@vscode/codicons": "^0.0.36",
+		"typescript": "npm:@isopodlabs/typescript@^5.8.0"
 	},
 	"dependencies": {
 		"@types/katex": "^0.16.7",

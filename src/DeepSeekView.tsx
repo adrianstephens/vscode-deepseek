@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import * as MD from "shared/markdown";
+import * as xml from "shared/xml";
 import OpenAI from "openai";
 import * as utils from "shared/utils";
 import {CSP, Nonce, id_selector} from "../shared/src/jsx-runtime";
@@ -16,8 +17,7 @@ async function toHtml(text: string) {
 	const parser = new MD.BlockParser({});
 	const doc = parser.parse(text);
 
-	const renderer = new MD.HtmlRenderer({});
-	const html = renderer.render(doc);
+	const html = doc.toString();
 
 	const renderedHtml = html.replace(/\$\$([\s\S]+?)\$\$/g, (match, p1) => {
 		return katex.renderToString(p1, { displayMode: true });
