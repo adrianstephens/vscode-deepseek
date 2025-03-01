@@ -1,11 +1,10 @@
 import * as vscode from "vscode";
 import * as MD from "shared/markdown";
+import * as LaTeX from "shared/LaTeX";
 import * as xml from "shared/xml";
-import OpenAI from "openai";
 import * as utils from "shared/utils";
-import {CSP, Nonce, id_selector} from "../shared/src/jsx-runtime";
-import * as katex from "katex";
-//import "katex/dist/katex.min.css";
+import {CSP, Nonce, id_selector} from "shared/jsx-runtime";
+import OpenAI from "openai";
 
 //-----------------------------------------------------------------------------
 //	ModuleViewProvider
@@ -17,14 +16,48 @@ async function toHtml(text: string) {
 	const parser = new MD.BlockParser({});
 	const doc = parser.parse(text);
 
-	const html = doc.toString();
+	for (const i of MD.walk(doc)) {
+		if (i instanceof xml.Element) {
+			delete i.attributes['data-sourcepos'];
+			if (i.name === 'a' && MD.potentiallyUnsafe(i.attributes.href))
+				delete i.attributes.href;
+			else if (i.name === 'img' && MD.potentiallyUnsafe(i.attributes.src))
+				i.attributes.src = '';
 
+		} else if (i instanceof MD.Text) {
+			const p		= new utils.StringParser(i.literal);
+			const re	= /\$(.*?)\$|\\\[\s+(.*?)\s+\\]|\\\((.*?)\\\)|(?=\\boxed\{)/;
+			const nodes: xml.Node[] = [];
+			let prevpos	= 0;
+			let m;
+			while (m = p.exec(re)) {
+				try {
+					const text = m[1] || m[2] || m[3];
+					const exp = LaTeX.expression(text ? new utils.StringParser(text) : p);
+					if (exp) {
+						nodes.push(i.literal.slice(prevpos, prevpos + m.index));
+						nodes.push(exp);
+						console.log(exp.toString());
+					}
+					prevpos = p.pos;
+				} catch (e) {
+					console.log(e);
+				}
+			}
+			nodes.push(i.literal.slice(prevpos));
+			i.parent?.children.splice(i.parent.children.indexOf(i), 1, ...nodes);
+			console.log(i.parent?.toString());
+		}
+	}
+	return doc.toString();
+/*
 	const renderedHtml = html.replace(/\$\$([\s\S]+?)\$\$/g, (match, p1) => {
 		return katex.renderToString(p1, { displayMode: true });
 	}).replace(/\$([\s\S]+?)\$/g, (match, p1) => {
 		return katex.renderToString(p1, { displayMode: false });
 	});
 	return renderedHtml;
+	*/
 }
 
 export class DeepSeekWebViewProvider implements vscode.WebviewViewProvider {
@@ -66,6 +99,12 @@ export class DeepSeekWebViewProvider implements vscode.WebviewViewProvider {
 
 	private getUri(name: string) {
 		return this.view!.webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, name));
+	}
+
+	addMessage(question: string, answer: string) {
+		this.log.push({question, answer});
+		this.view?.webview.postMessage({command: 'clear'});
+		this.redraw();
 	}
 
 	async resolveWebviewView(webviewView: vscode.WebviewView, context: vscode.WebviewViewResolveContext, token: vscode.CancellationToken): Promise<void> {
