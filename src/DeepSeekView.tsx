@@ -1,9 +1,9 @@
 import * as vscode from "vscode";
 import * as MD from "shared/markdown";
 import * as LaTeX from "shared/LaTeX";
-import * as xml from "shared/xml";
+import * as xml from "@isopodlabs/xml";
 import * as utils from "shared/utils";
-import {CSP, Nonce, id_selector} from "shared/jsx-runtime";
+import {JSX, CSP, Nonce, id_selector} from "@isopodlabs/vscode_utils/jsx-runtime";
 import OpenAI from "openai";
 
 //-----------------------------------------------------------------------------

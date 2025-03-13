@@ -1,15 +1,15 @@
 {
 	"compilerOptions": {
 		"target": "es2022",
-		"module": "CommonJS",
-		"moduleResolution": "node",
+		"module": "Node16",
+		"moduleResolution": "node16",
 		"lib": ["es2022", "dom"],
 		"outDir": "out",
 		"sourceMap": true,
 		"strict": true,
 		"rootDir": ".",
 		"jsx": "react-jsx",
-		"jsxImportSource": "shared",
+		"jsxImportSource": "@isopodlabs/vscode_utils",
 		"forceConsistentCasingInFileNames": true,
 		"rewriteImports": true,
 		"baseUrl": "src",
@@ -19,6 +19,6 @@
 			]
 		}
 	},
-	"include": ["src/extension.ts", "shared/src/jsx.d.ts"],
+	"include": ["src/extension.ts"],
   }
   

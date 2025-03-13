@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import {DeepSeekWebViewProvider} from "./DeepSeekView";
-import * as font from "shared/font";
+import * as font from "@isopodlabs/binary_fonts";
 
 //-----------------------------------------------------------------------------
 // entry
@@ -11,7 +11,7 @@ async function testFont(srce: vscode.Uri, dest: vscode.Uri) {
 		for (;;) {
 			try {
 			const f = await font.load(buffer);
-			if (f) {
+			if (f && f instanceof font.Font) {
 				const map	= f.getGlyphMapping();
 				const id	= map![66];
 				const svg	= f.getGlyphSVG(id);
