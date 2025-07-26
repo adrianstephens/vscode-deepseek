@@ -12,6 +12,10 @@ async function testFont(srce: vscode.Uri, dest: vscode.Uri) {
 			try {
 			const f = await font.load(buffer);
 			if (f && f instanceof font.Font) {
+				if (f.MATH) {
+					console.log(`MATH ${srce.fsPath}`);
+					return;
+				}
 				const map	= f.getGlyphMapping();
 				const id	= map![66];
 				const svg	= f.getGlyphSVG(id);
@@ -40,9 +44,10 @@ function testFonts(dir: vscode.Uri, dest: vscode.Uri) {
 }
 
 export function activate(context: vscode.ExtensionContext): void {
+//	testFonts(vscode.Uri.file("node_modules/katex/dist/fonts"), vscode.Uri.joinPath(context.extensionUri, 'hidden'));
 //	testFonts(vscode.Uri.file("/Users/adrianstephens/Library/Fonts"), vscode.Uri.joinPath(context.extensionUri, 'hidden'));
 	const deep = new DeepSeekWebViewProvider(context);
-	vscode.workspace.fs.readFile(vscode.Uri.joinPath(context.extensionUri, "hidden/sample.md"))
+	vscode.workspace.fs.readFile(vscode.Uri.joinPath(context.extensionUri, "hidden/sum2.md"))
 		.then(buffer => deep.addMessage("why", buffer.toString()));
 
 }

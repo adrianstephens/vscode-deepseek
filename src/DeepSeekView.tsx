@@ -10,11 +10,11 @@ import OpenAI from "openai";
 //	ModuleViewProvider
 //-----------------------------------------------------------------------------
 
-async function toHtml(text: string) {
-	const html0 = await vscode.commands.executeCommand<string>('markdown.api.render', text);
+async function toHtml(originalText: string) {
+	const html0 = await vscode.commands.executeCommand<string>('markdown.api.render', originalText);
 
 	const parser = new MD.BlockParser({});
-	const doc = parser.parse(text);
+	const doc = parser.parse(originalText);
 
 	for (const i of MD.walk(doc)) {
 		if (i instanceof xml.Element) {
@@ -37,7 +37,7 @@ async function toHtml(text: string) {
 					if (exp) {
 						nodes.push(i.literal.slice(prevpos, prevpos + m.index));
 						nodes.push(exp);
-						console.log(exp.toString());
+						//console.log(exp.toString());
 					}
 					prevpos = p.pos;
 				} catch (e) {
@@ -46,10 +46,10 @@ async function toHtml(text: string) {
 			}
 			nodes.push(i.literal.slice(prevpos));
 			i.parent?.children.splice(i.parent.children.indexOf(i), 1, ...nodes);
-			console.log(i.parent?.toString());
+			//console.log(i.parent?.toString());
 		}
 	}
-	return doc.toString();
+	return doc.toString({newline:'', indent:'', noSelfClose:/.*/});
 /*
 	const renderedHtml = html.replace(/\$\$([\s\S]+?)\$\$/g, (match, p1) => {
 		return katex.renderToString(p1, { displayMode: true });
@@ -103,7 +103,7 @@ export class DeepSeekWebViewProvider implements vscode.WebviewViewProvider {
 
 	addMessage(question: string, answer: string) {
 		this.log.push({question, answer});
-		this.view?.webview.postMessage({command: 'clear'});
+		//this.view?.webview.postMessage({command: 'clear'});
 		this.redraw();
 	}
 
@@ -123,7 +123,12 @@ export class DeepSeekWebViewProvider implements vscode.WebviewViewProvider {
 					try {
 						const stream = await this.openai.chat.completions.create({
 							model: 		this.model,
-							messages:	[{ role: "user", content: message.text}],
+							messages:	[...this.log.map(i => [
+								{ role: "user", content: i.question},
+								{ role: "assistant", content: i.answer},
+							]).flat() as Array<OpenAI.ChatCompletionMessageParam>,
+								{ role: "user", content: message.text},
+							],
 							store:		true,
 							stream:		true,
 						});
@@ -139,9 +144,12 @@ export class DeepSeekWebViewProvider implements vscode.WebviewViewProvider {
 						for await (const chunk of stream) {
 							text += chunk.choices[0]?.delta?.content || "";
 							text = text.replace(/(?<!\n)\n<\/think>/g, '\n\n</think>');
-
-							const html = await toHtml(text);
-							webview.postMessage({command: 'set', html});
+							try {
+								const html = await toHtml(text);
+								webview.postMessage({command: 'set', html});
+							} catch (e) {
+								console.error(e);
+							}
 						}
 						this.log.push({question: message.text, answer: text});
 
@@ -159,10 +167,11 @@ export class DeepSeekWebViewProvider implements vscode.WebviewViewProvider {
 			<head>
 				<meta charset="UTF-8"/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-   				<CSP csp={this.view!.webview.cspSource} script={nonce}/>
-				<link rel="stylesheet" type="text/css" href={this.getUri('shared/assets/shared.css')}/>
+   				<CSP csp={this.view!.webview.cspSource+" 'unsafe-inline'"} script={nonce}/>
+				<link rel="stylesheet" type="text/css" href={this.getUri('node_modules/@isopodlabs/vscode_utils/assets/shared.css')}/>
 				<link rel="stylesheet" type="text/css" href={this.getUri('assets/deepseek.css')}/>
-				<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" />
+				<link rel="stylesheet" type="text/css" href={this.getUri('assets/maths.css')}/>
+				{/*<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" />*/}
 				{/*
 				<script nonce={nonce}>{`
 					window.MathJax = {
@@ -191,7 +200,7 @@ export class DeepSeekWebViewProvider implements vscode.WebviewViewProvider {
 			<script>
 
 			</script>
-				<script nonce={nonce.value} src={this.getUri("shared/assets/shared.js")}/>
+				<script nonce={nonce.value} src={this.getUri("node_modules/@isopodlabs/vscode_utils/assets/shared.js")}/>
 				<script nonce={nonce.value} src={this.getUri("assets/deepseek.js")}/>
 			</body>
 		</html>);

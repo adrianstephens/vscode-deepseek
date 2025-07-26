@@ -1,3 +1,5 @@
+/* global window document vscode createElement */
+
 const chatContainer = document.getElementById('chat-container');
 const chatInput 	= document.getElementById('chat-input');
 const sendButton 	= document.getElementById('send-button');
@@ -37,14 +39,14 @@ window.addEventListener('message', event => {
 
 		case 'set':
 			reply.innerHTML = event.data.html;
-			if (window.MathJax) {
-				window.MathJax.typesetPromise([reply]).then(() => {
-                    console.log('MathJax typesetting complete');
-                }).catch((err) => {
-                    console.error('MathJax typesetting failed:', err);
-                });
-                //window.MathJax.typesetPromise([reply]);
-            }
+			//if (window.MathJax) {
+			//	window.MathJax.typesetPromise([reply]).then(() => {
+            //        console.log('MathJax typesetting complete');
+            //    }).catch((err) => {
+            //        console.error('MathJax typesetting failed:', err);
+            //    });
+            //    //window.MathJax.typesetPromise([reply]);
+            //}
 			break;
 
 		case 'clear':
